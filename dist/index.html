@@ -95,7 +95,7 @@
 <!-- CONTACT -->
 <div class="pg" id="p-contact">
  <div class="wrap">
-  <div class="pt"><h1>Talk to the ILMA team</h1><p class="sub">Questions, pricing or a demo for your school. Contact details and online enquiries will be available soon.</p></div>
+  <div class="pt"><h1>Talk to the ILMA team</h1><p class="sub">Questions, pricing or a demo for your school. Send an enquiry and our team can follow up.</p></div>
   <div class="ct">
    <form class="fc" id="cform" novalidate>
     <div id="cf-body">
@@ -105,7 +105,10 @@
     <div class="g2"><div><label class="fl" for="c-size">Number of students</label><select class="fi2" id="c-size"><option>Under 300</option><option>300 to 800</option><option>800 to 2,000</option><option>2,000 or more</option></select></div><div><label class="fl" for="c-city">City</label><input class="fi2" id="c-city" autocomplete="address-level2"></div></div>
     <label class="fl" for="c-msg">How can we help?</label><textarea class="fi2" id="c-msg" rows="4" placeholder="For example: we collect fees by hand and want parents to pay online"></textarea>
     <div class="er" data-e="msg"></div>
-    <div class="mf" style="justify-content:space-between;align-items:center"><span class="sub" style="margin:0;font-size:14px">Preview form · message delivery coming soon.</span><button class="btn p" type="submit">Preview message</button></div>
+    <label class="consent"><input id="c-consent" type="checkbox"><span>I agree ILMA may use these details to respond to my enquiry.</span></label><div class="er" data-e="consent"></div>
+    <div class="trap" aria-hidden="true"><label for="c-website">Leave this field empty</label><input id="c-website" tabindex="-1" autocomplete="off"></div>
+    <div class="er" id="c-submit-error" role="status" aria-live="polite"></div>
+    <div class="mf" style="justify-content:space-between;align-items:center"><span class="sub" style="margin:0;font-size:14px">Your enquiry will be stored securely for the ILMA team.</span><button class="btn p" type="submit">Send enquiry</button></div>
     </div>
    </form>
    <div>
@@ -120,12 +123,34 @@
   </div>
  </div>
 </div>
+
+<!-- ADMIN -->
+<div class="pg" id="p-admin">
+ <div class="wrap">
+  <div class="pt"><h1>ILMA lead inbox</h1><p class="sub">Private workspace for reviewing contact enquiries and demo requests.</p></div>
+  <section class="fc admin-auth" id="admin-login">
+   <form id="admin-login-form" novalidate>
+    <h2>Admin sign in</h2>
+    <label class="fl" for="admin-email">Email</label><input class="fi2" id="admin-email" type="email" autocomplete="username" required>
+    <label class="fl" for="admin-password">Password</label><input class="fi2" id="admin-password" type="password" autocomplete="current-password" required>
+    <div class="mf"><button class="btn p" type="submit">Sign in</button></div>
+   </form>
+   <p class="admin-message" id="admin-auth-message" role="status" aria-live="polite"></p>
+  </section>
+  <section class="admin-panel" id="admin-panel" hidden>
+   <div class="admin-toolbar"><div><b id="admin-identity"></b><p class="sub">Lead records are visible only to provisioned ILMA admins.</p></div><div class="admin-actions"><button class="btn g" id="admin-refresh" type="button">Refresh</button><button class="btn g" id="admin-signout" type="button">Sign out</button></div></div>
+   <div class="admin-filters"><label for="admin-status-filter">Show</label><select class="fi2" id="admin-status-filter"><option value="all">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="closed">Closed</option></select></div>
+   <p class="admin-message" id="admin-list-message" role="status" aria-live="polite"></p>
+   <div class="admin-leads" id="admin-leads" aria-live="polite"></div>
+  </section>
+ </div>
+</div>
 </main>
 
 <footer><div class="wrap">
  <div class="g"><div><a class="logo" href="#/home" style="color:#fff;padding:0"><span class="lg">✦</span>ILMA</a><p style="margin-top:14px;max-width:24em">School management for Pakistan, in Urdu and English.</p></div>
   <div><h4>Product</h4><a href="#/features">All modules</a><a href="#/features" data-s="Exams and Results">Exams and results</a><a href="#/features" data-s="Fees and Finance">Fees and finance</a><a href="#/features" data-s="Insight and AI">ILMA AI</a></div>
-  <div><h4>Company</h4><a href="#/contact">Contact</a><a href="#" data-demo>Book a demo</a><a href="#/contact">Questions</a></div>
+  <div><h4>Company</h4><a href="#/contact">Contact</a><a href="#" data-demo>Book a demo</a><a href="#/contact">Questions</a><a href="#/admin">Admin</a></div>
   <div><h4>Legal</h4><a href="#/home" data-t="Privacy policy will be added before launch.">Privacy</a><a href="#/home" data-t="Terms will be added before launch.">Terms</a></div></div>
  <div class="bt"><span>© 2026 ILMA. All rights reserved.</span><span>Product preview · Sample data. Contact details coming soon.</span></div>
 </div></footer>
@@ -136,6 +161,10 @@
 <div id="toast" role="status"></div>
 
 <script src="./assets/catalogue.js" defer></script>
+<script src="./assets/backend-config.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="./assets/backend.js" defer></script>
 <script src="./assets/app.js" defer></script>
+<script src="./assets/admin.js" defer></script>
 </body>
 </html>

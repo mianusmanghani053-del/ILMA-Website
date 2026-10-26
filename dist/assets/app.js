@@ -7,10 +7,10 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 let lang='en',sel=new Set();
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2800)}
 /* ---- routing ---- */
-function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','contact'].includes(h)?h:'home';
+function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','contact','admin'].includes(h)?h:'home';
  $$('.pg').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('.links a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
  $('#links').classList.remove('on');$('#burger').setAttribute('aria-expanded','false');
- document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',contact:'Contact - ILMA'}[p];
+ document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA'}[p];
  window.scrollTo(0,0);if(p==='home')startFeed();else stopFeed();if(p==='features')renderF();tray()}
 addEventListener('hashchange',route);
 /* ---- language ---- */
@@ -59,11 +59,11 @@ function openDrawer(h){lastF=document.activeElement;$('#dr').innerHTML=h;$('#dr'
 function closeAll(){$('#scrim').classList.remove('on');$('#scrim2').classList.remove('on');document.body.style.overflow='';if(lastF&&lastF.focus)lastF.focus()}
 addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();if(e.key==='Tab'&&$('#scrim').classList.contains('on')){const f=[...$('#md').querySelectorAll('input,select,textarea,button:not(:disabled)')];if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
 /* ---- demo flow ---- */
-const DAYS=[...Array(5)].map((_,i)=>{const d=new Date(new Date().toLocaleDateString('en-US',{timeZone:'Asia/Karachi'}));d.setDate(d.getDate()+i+1);return{iso:d.toISOString().slice(0,10).replace(/^(\d{4})-(\d\d)-(\d\d)$/,(_,y,m,dd)=>`${y}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`),w:d.toLocaleDateString('en-GB',{weekday:'short'}),n:d.getDate(),m:d.toLocaleDateString('en-GB',{month:'short'}),dt:d}});
+const DAYS=[...Array(5)].map((_,i)=>{const d=new Date(new Date().toLocaleDateString('en-US',{timeZone:'Asia/Karachi'}));d.setDate(d.getDate()+i+1);return{iso:`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,w:d.toLocaleDateString('en-GB',{weekday:'short'}),n:d.getDate(),m:d.toLocaleDateString('en-GB',{month:'short'}),dt:d}});
 const SLOTS=['10:00','11:30','14:00','16:00'];
 const taken=(di,si)=>(di*3+si*5)%7===0||(di===2&&si===1);
 let D={};
-function demo(){D={step:1,name:'',school:'',role:'Owner or director',phone:'',email:'',size:'300 to 800',city:'',day:null,slot:null,err:{}};demoUI()}
+function demo(){D={step:1,name:'',school:'',role:'Owner or director',phone:'',email:'',size:'300 to 800',city:'',consent:false,day:null,slot:null,err:{},requestError:'',sending:false};demoUI()}
 const sSteps=n=>`<div class="steps" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
 function demoUI(){const d=D,e=d.err;
  if(d.step===1)return openModal(`<div class="mh"><h2 id="mt">Book a demo</h2><button class="x" data-close aria-label="Close">✕</button></div>${sSteps(1)}<form class="mb" id="dform" novalidate><p class="sub" style="margin:0 0 4px;font-size:16px">30 minutes on video. We show the modules that matter to your school.</p>
@@ -71,28 +71,37 @@ function demoUI(){const d=D,e=d.err;
  <label class="fl" for="d-school">School name</label><input class="fi2 ${e.school?'bad':''}" id="d-school" value="${E(d.school)}" autocomplete="organization">${e.school?`<div class="er">${e.school}</div>`:''}
  <div class="g2"><div><label class="fl" for="d-phone">Mobile number</label><input class="fi2 ${e.phone?'bad':''}" id="d-phone" value="${E(d.phone)}" inputmode="tel" placeholder="0300 1234567" autocomplete="tel">${e.phone?`<div class="er">${e.phone}</div>`:''}</div><div><label class="fl" for="d-email">Email</label><input class="fi2 ${e.email?'bad':''}" id="d-email" type="email" value="${E(d.email)}" autocomplete="email">${e.email?`<div class="er">${e.email}</div>`:''}</div></div>
  <div class="g2"><div><label class="fl" for="d-size">Number of students</label><select class="fi2" id="d-size">${['Under 300','300 to 800','800 to 2,000','2,000 or more'].map(r=>`<option ${r===d.size?'selected':''}>${r}</option>`).join('')}</select></div><div><label class="fl" for="d-city">City</label><input class="fi2" id="d-city" value="${E(d.city)}" autocomplete="address-level2"></div></div>
+ <label class="consent"><input id="d-consent" type="checkbox" ${d.consent?'checked':''}><span>I agree ILMA may use these details to respond to my demo request.</span></label>${e.consent?`<div class="er">${e.consent}</div>`:''}
  ${sel.size?`<div class="tip">You picked ${sel.size} module${sel.size>1?'s':''} to see: ${[...sel].slice(0,3).map(E).join(', ')}${sel.size>3?' and '+(sel.size-3)+' more':''}.</div>`:''}
  <div class="mf"><button class="btn g" type="button" data-close>Cancel</button><button class="btn p" type="submit">Choose a time</button></div></form>`);
  if(d.step===2)return openModal(`<div class="mh"><h2 id="mt">Choose a time</h2><button class="x" data-close aria-label="Close">✕</button></div>${sSteps(2)}<div class="mb"><p class="sub" style="margin:0 0 14px;font-size:16px">Pakistan time (UTC+5). Pick a day, then a slot.</p>
  <div class="days" role="group" aria-label="Day">${DAYS.map((x,i)=>`<button class="day ${d.day===i?'on':''}" data-day="${i}" aria-pressed="${d.day===i}"><small>${x.w}</small>${x.n}<small>${x.m}</small></button>`).join('')}</div>
  ${d.day==null?'<p class="sub" style="font-size:15px;margin-top:14px">Choose a day to see open slots.</p>':`<div class="slots" role="group" aria-label="Time">${SLOTS.map((t,i)=>`<button class="slot ${d.slot===i?'on':''}" data-slot="${i}" ${taken(d.day,i)?'disabled aria-label="'+t+' taken"':''}>${t}</button>`).join('')}</div>`}
- ${e.slot?`<div class="er">${e.slot}</div>`:''}
- <div class="mf"><button class="btn g" data-back>Back</button><button class="btn p" data-confirm>Preview request</button></div></div>`);
- const x=DAYS[d.day];openModal(`<div class="mh"><h2 id="mt">Demo request preview</h2><button class="x" data-close aria-label="Close">✕</button></div>${sSteps(3)}<div class="mb"><div class="done" aria-hidden="true">✓</div><p>Thank you, ${E(d.name.split(' ')[0])}. Your preferred time is shown below. Online booking is not connected yet; no request or email has been sent.</p>
- <div class="sum"><div><span>When</span><b>${x.w} ${x.n} ${x.m} ${x.dt.getFullYear()}, ${SLOTS[d.slot]}</b></div><div><span>Length</span><b>30 minutes, video call</b></div><div><span>School</span><b>${E(d.school)}</b></div><div><span>Modules to see</span><b>${sel.size?sel.size+' picked by you':'Overview of all suites'}</b></div></div>
- <div class="tip">Preview only. This time is not reserved. You can download a tentative calendar reminder.</div>
+ ${e.slot?`<div class="er">${e.slot}</div>`:''}${d.requestError?`<div class="er" role="alert">${E(d.requestError)}</div>`:''}
+ <div class="mf"><button class="btn g" data-back ${d.sending?'disabled':''}>Back</button><button class="btn p" data-confirm ${d.sending?'disabled':''}>${d.sending?'Sending…':'Send demo request'}</button></div></div>`);
+ const x=DAYS[d.day];openModal(`<div class="mh"><h2 id="mt">Demo request sent</h2><button class="x" data-close aria-label="Close">✕</button></div>${sSteps(3)}<div class="mb"><div class="done" aria-hidden="true">✓</div><p>Thank you, ${E(d.name.split(' ')[0])}. Your demo request has been recorded. The time below is your preference only; it is not reserved. The ILMA team can follow up using your contact details.</p>
+ <div class="sum"><div><span>Preferred time</span><b>${x.w} ${x.n} ${x.m} ${x.dt.getFullYear()}, ${SLOTS[d.slot]}</b></div><div><span>Length</span><b>30 minutes, video call</b></div><div><span>School</span><b>${E(d.school)}</b></div><div><span>Modules to see</span><b>${sel.size?sel.size+' picked by you':'Overview of all suites'}</b></div></div>
+ <div class="tip">This is a request, not a confirmed booking. You can download a tentative calendar reminder.</div>
  <div class="mf"><button class="btn g" data-ics>Add to calendar</button><button class="btn p" data-close>Done</button></div></div>`)}
-function demoNext(){const d=D,v=s=>$('#'+s).value.trim();d.name=v('d-name');d.role=$('#d-role').value;d.school=v('d-school');d.phone=v('d-phone');d.email=v('d-email');d.size=$('#d-size').value;d.city=v('d-city');
- const e={};if(d.name.length<3)e.name='Enter your full name.';if(d.school.length<3)e.school='Enter your school name.';if(!/^(\+92|0)3\d{2}[- ]?\d{7}$/.test(d.phone))e.phone='Enter a mobile number like 0300 1234567.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email))e.email='Enter an email like name@school.com.';
+function demoNext(){const d=D,v=s=>$('#'+s).value.trim();d.name=v('d-name');d.role=$('#d-role').value;d.school=v('d-school');d.phone=v('d-phone');d.email=v('d-email');d.size=$('#d-size').value;d.city=v('d-city');d.consent=$('#d-consent').checked;
+ const e={};if(d.name.length<3)e.name='Enter your full name.';if(d.school.length<3)e.school='Enter your school name.';if(!/^(\+92|0)3\d{2}[- ]?\d{7}$/.test(d.phone))e.phone='Enter a mobile number like 0300 1234567.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email))e.email='Enter an email like name@school.com.';if(!d.consent)e.consent='Please agree before sending your demo request.';
  d.err=e;if(Object.keys(e).length)return demoUI();d.step=2;demoUI()}
+async function confirmDemoRequest(){if(D.day==null||D.slot==null){D.err={slot:'Choose a day and a time.'};return demoUI()}D.sending=true;D.requestError='';demoUI();
+ try{await window.ilmaBackend.submitLead({kind:'demo',name:D.name,role:D.role,school:D.school,phone:D.phone,email:D.email,student_range:D.size,city:D.city,message:'',preferred_date:DAYS[D.day].iso,preferred_time:SLOTS[D.slot],selected_modules:[...sel],consent:true});D.step=3;D.sending=false;demoUI()}
+ catch(error){D.sending=false;D.requestError=error.message;demoUI()}}
 function ics(){const x=DAYS[D.day],t=SLOTS[D.slot].replace(':',''),p=n=>String(n).padStart(2,'0'),dt=`${x.dt.getFullYear()}${p(x.dt.getMonth()+1)}${p(x.dt.getDate())}`,h=+SLOTS[D.slot].slice(0,2),mi=+SLOTS[D.slot].slice(3),em=h*60+mi+30,end=`${dt}T${p(Math.floor(em/60))}${p(em%60)}00`;
  const c=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ILMA//Demo//EN','BEGIN:VEVENT','UID:ilma-demo-'+Date.now()+'@ilma.example','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z/,'Z')+'',`DTSTART;TZID=Asia/Karachi:${dt}T${t}00`,`DTEND;TZID=Asia/Karachi:${end}`,'STATUS:TENTATIVE' , 'SUMMARY:ILMA demo request (unconfirmed)','DESCRIPTION:30-minute video demo of ILMA for '+D.school,'END:VEVENT','END:VCALENDAR'].join('\r\n'),u=URL.createObjectURL(new Blob([c],{type:'text/calendar'})),a=document.createElement('a');a.href=u;a.download='ILMA-demo.ics';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('Calendar file downloaded')}
 /* ---- contact form ---- */
-$('#cform').addEventListener('submit',e=>{e.preventDefault();const v=s=>$('#'+s).value.trim(),er={};
+$('#cform').addEventListener('submit',async e=>{e.preventDefault();const v=s=>$('#'+s).value.trim(),er={};
  if(v('c-name').length<3)er.name='Enter your full name.';if(v('c-school').length<3)er.school='Enter your school name.';if(!/^(\+92|0)3\d{2}[- ]?\d{7}$/.test(v('c-phone')))er.phone='Enter a mobile number like 0300 1234567.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('c-email')))er.email='Enter an email like name@school.com.';if(v('c-msg').length<10)er.msg='Write a sentence about what you need.';
  $$('#cform [data-e]').forEach(x=>x.textContent=er[x.dataset.e]||'');['name','school','phone','email'].forEach(k=>$('#c-'+k).classList.toggle('bad',!!er[k]));$('#c-msg').classList.toggle('bad',!!er.msg);
  if(Object.keys(er).length){const f=$('#cform .bad');f&&f.focus();return}
- $('#cf-body').innerHTML=`<div style="padding:30px 6px"><div class="done" aria-hidden="true">✓</div><h2 style="font-size:30px">Message preview ready</h2><p class="sub">Thank you, ${E(v('c-name').split(' ')[0])}. Your message has passed validation. Message delivery is not connected yet; nothing has been sent. Please keep a copy until contact details are available.</p><div class="mf" style="justify-content:flex-start"><button class="btn p" type="button" data-demo>Book a demo meanwhile</button></div></div>`});
+ if(!$('#c-consent').checked){$('[data-e="consent"]').textContent='Please agree before sending your enquiry.';$('#c-consent').focus();return}
+ if(v('c-website'))return;
+ const submit=$('#cform button[type="submit"]');submit.disabled=true;$('#c-submit-error').textContent='';
+ try{await window.ilmaBackend.submitLead({kind:'contact',name:v('c-name'),role:$('#c-role').value,school:v('c-school'),phone:v('c-phone'),email:v('c-email'),student_range:$('#c-size').value,city:v('c-city'),message:v('c-msg'),preferred_date:null,preferred_time:null,selected_modules:[],consent:true});
+  $('#cf-body').innerHTML=`<div style="padding:30px 6px"><div class="done" aria-hidden="true">✓</div><h2 style="font-size:30px">Enquiry received</h2><p class="sub">Thank you, ${E(v('c-name').split(' ')[0])}. Your enquiry has been saved for the ILMA team to follow up. No email notification is sent yet.</p><div class="mf" style="justify-content:flex-start"><button class="btn p" type="button" data-demo>Book a demo</button></div></div>`;
+ }catch(error){$('#c-submit-error').textContent=error.message;submit.disabled=false}});
 /* ---- global clicks ---- */
 document.addEventListener('click',e=>{const t=e.target;
  if(t.closest('[data-demo]')){e.preventDefault();demo();return}
@@ -102,7 +111,7 @@ document.addEventListener('click',e=>{const t=e.target;
  if(b=t.closest('[data-day]')){D.day=+b.dataset.day;D.slot=null;D.err={};demoUI();return}
  if(b=t.closest('[data-slot]')){D.slot=+b.dataset.slot;D.err={};demoUI();return}
  if(t.closest('[data-back]')){D.step=1;demoUI();return}
- if(t.closest('[data-confirm]')){if(D.day==null||D.slot==null){D.err={slot:'Choose a day and a time.'};return demoUI()}D.step=3;demoUI();return}
+ if(t.closest('[data-confirm]')){void confirmDemoRequest();return}
  if(t.closest('[data-ics]')){ics();return}
  if(b=t.closest('[data-m]')){openMod(b.dataset.m);return}
  if(b=t.closest('[data-pickd]')){pick(b.dataset.pickd);closeAll();return}
