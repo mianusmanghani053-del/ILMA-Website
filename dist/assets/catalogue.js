@@ -106,6 +106,6 @@ const SUITES=[
  ['ILMA Graduate Outcomes','Tracks what happens after graduation.','Jobs and further study by programme;Employer feedback','soon']]]
 ];
 SUITES.unshift(SUITES.splice(SUITES.findIndex(x=>x[0]==='Insight and AI'),1)[0]);
-const HUES=['#6a3df0','#7a3de6','#8a37dc','#9a36d3','#a935c9','#b736bd','#c335ae','#cc329f','#d32d92','#d62a85','#e0337c','#5b3fd9','#7b2fd0','#a02fc0','#c92c9a'];
+const HUES=['#104ac8','#155eef','#1769d5','#087fa9','#006e9c','#2254d8','#4546dc','#6545ed','#7341d3','#087b94','#1565ba','#1647b8','#4c4cce','#5d43d5','#075f90'];
 const MODS=SUITES.flatMap((s,si)=>s[3].map(m=>({n:m[0],d:m[1],c:m[2].split(';'),soon:m[3]==='soon',s:s[0],si,id:m[0]})));
 const total=MODS.length; // 90
