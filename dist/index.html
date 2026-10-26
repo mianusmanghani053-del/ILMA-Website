@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILMA - The whole school in one calm place</title>
+<meta name="description" content="ILMA is a school platform with 90 modules: admissions, attendance, exams, fees, parent communication and AI, in Urdu and English.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<a class="skip sr" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap">
+ <a class="logo" href="#/home" aria-label="ILMA home"><span class="lg">✦</span>ILMA</a>
+ <nav class="links" id="links" aria-label="Main">
+  <a href="#/home" data-p="home" data-en="Home" data-ur="ہوم">Home</a>
+  <a href="#/features" data-p="features" data-en="Features" data-ur="خصوصیات">Features</a>
+  <a href="#/contact" data-p="contact" data-en="Contact" data-ur="رابطہ">Contact</a>
+ </nav>
+ <span class="sp"></span>
+ <button class="lang" id="lang" aria-label="Switch language">اردو</button>
+ <button class="btn p demo" data-demo data-en="Book a demo" data-ur="ڈیمو بُک کریں">Book a demo</button>
+ <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+</div></header>
+
+<main id="main">
+<!-- HOME -->
+<div class="pg" id="p-home">
+ <div class="hero"><div class="hp">
+  <div>
+   <h1 id="h1" data-en="The whole school, in one calm place." data-ur="پورا اسکول، ایک پرسکون جگہ پر">The whole school, in one calm place.</h1>
+   <p class="lead" id="lead" data-en="Admissions, attendance, exams, fees and parent messages run from one system. Teachers spend less time on paperwork. Parents always know what is happening." data-ur="داخلہ، حاضری، امتحانات، فیس اور والدین سے رابطہ، سب کچھ ایک ہی نظام میں۔ اساتذہ کا وقت کاغذی کارروائی میں کم لگتا ہے اور والدین ہر بات سے باخبر رہتے ہیں۔">Admissions, attendance, exams, fees and parent messages run from one system. Teachers spend less time on paperwork. Parents always know what is happening.</p>
+   <div class="acts"><button class="btn w" data-demo data-en="Book a demo" data-ur="ڈیمو بُک کریں">Book a demo</button><a class="btn o" href="#/features" data-en="See all 90 modules" data-ur="تمام 90 ماڈیولز دیکھیں">See all 90 modules</a></div>
+   <p class="note">Works in Urdu and English. Pay by Raast, JazzCash, Easypaisa or card.</p>
+  </div>
+  <div style="position:relative">
+   <div class="ph" aria-label="A parent's phone showing a school day"><div class="scr">
+    <div class="top"><b>Today</b><span class="clock" id="clock" aria-live="off">7:45</span></div>
+    <div class="who"><span class="av">AB</span>Parent of Ayesha · Class 7-B</div>
+    <div class="feed" id="feed"></div>
+   </div></div>
+   <div class="chipf"><span>✓</span> Fee receipt sent to the family on WhatsApp</div>
+  </div>
+ </div></div>
+
+ <section class="s"><div class="wrap">
+  <div class="hd"><div><h2 class="h2">One school, four different views</h2><p class="sub">Each person opens ILMA and sees only what they need to act on today.</p></div></div>
+  <div class="rl"><div class="tabs" role="tablist" id="rtabs"></div><div class="pn" id="rpanel" role="tabpanel" aria-live="polite"></div></div>
+ </div></section>
+
+ <section class="s"><div class="wrap">
+  <div class="hd"><div><h2 class="h2">90 modules in 15 suites. Start with what you need.</h2><p class="sub">Most schools begin with fees and attendance, then add exams, portals and the rest when they are ready.</p></div><a class="btn g" href="#/features">Browse all modules</a></div>
+  <div class="ix" id="ix"></div>
+ </div></section>
+
+ <section class="s"><div class="wrap"><div class="ai">
+  <div>
+   <h2>ILMA AI takes the typing off your teachers</h2>
+   <p>It works inside each module, shows where its answers come from, and never publishes anything without a person confirming it.</p>
+   <ul><li>Reads a photo of a marks sheet and fills the marks grid</li><li>Drafts quizzes and lesson plans in English and Urdu</li><li>Writes plain updates to parents from the school's own records</li><li>Flags students with falling marks, repeated absence or unpaid fees</li><li>Answers staff questions with the source shown</li></ul>
+  </div>
+  <div class="sc" aria-label="Marks sheet scanning demo">
+   <div class="t"><b>Class test · Urdu · 7-C</b><button class="btn p s" id="scanbtn">Read this sheet</button></div>
+   <div class="paper" id="paper"><div><span>1  Ahmed Bilal</span><span>17</span></div><div><span>2  Sara Iqbal</span><span>16</span></div><div><span>3  Bilal Tariq</span><span>15</span></div><div><span>4  Nida Farooq</span><span>1​4</span></div><div><span>5  Zainab Rauf</span><span>12</span></div><span class="scanl" id="scanl"></span></div>
+   <div class="rd" id="rd" aria-live="polite"></div>
+  </div>
+ </div></div></section>
+
+ <section class="s"><div class="wrap"><div class="loc">
+  <div><h2 class="h2">Made for how schools in Pakistan work</h2><p class="sub">Fees by installment, brothers and sisters on one account, parents who answer WhatsApp before email.</p><div style="margin-top:26px"><button class="btn p" data-demo>Book a demo</button></div></div>
+  <div class="lst">
+   <div><b>Urdu and English</b><span>Every screen and message in both languages, including right-to-left layouts.</span></div>
+   <div><b>Local payments</b><span>Raast, JazzCash, Easypaisa, cards, bank transfer and cash, with a receipt every time.</span></div>
+   <div><b>WhatsApp first</b><span>Fee reminders, attendance alerts and exam notices reach parents where they already are.</span></div>
+   <div><b>Family fee account</b><span>One balance and one payment for all siblings, with scholarships and discounts applied.</span></div>
+   <div><b>Board formats</b><span>Result cards and grade scales for Matric, Intermediate and Cambridge schools.</span></div>
+   <div><b>Many campuses</b><span>A head office view across branches, with each campus keeping its own records.</span></div>
+  </div>
+ </div></div>
+ <div class="wrap"><div class="cta"><div><h2>See ILMA with your own school's questions</h2><p>A 30-minute video call. We show the modules that matter to you and answer what you ask. No commitment.</p></div><button class="btn w" data-demo>Book a demo</button></div></div>
+ </section>
+</div>
+
+<!-- FEATURES -->
+<div class="pg" id="p-features">
+ <div class="wrap">
+  <div class="pt"><h1>Every part of running a school, in one system</h1><p class="sub">90 modules in 15 suites. Pick the ones you want to see and we will show them in your demo.</p></div>
+  <div class="fb"><div class="srch"><label class="sr" for="q">Search modules</label><input id="q" type="search" placeholder="Search modules, for example fees, attendance or transport" autocomplete="off"></div><span id="fcount" class="sub" style="margin:0;font-size:15px"></span></div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by suite"></div>
+  <div id="fgrid"></div>
+ </div>
+ <div class="wrap"><div class="cta"><div><h2>Not sure which modules you need?</h2><p>Tell us your school's size and what is hardest today. We will suggest a starting set.</p></div><button class="btn w" data-demo>Book a demo</button></div></div>
+</div>
+
+<!-- CONTACT -->
+<div class="pg" id="p-contact">
+ <div class="wrap">
+  <div class="pt"><h1>Talk to the ILMA team</h1><p class="sub">Questions, pricing or a demo for your school. Contact details and online enquiries will be available soon.</p></div>
+  <div class="ct">
+   <form class="fc" id="cform" novalidate>
+    <div id="cf-body">
+    <div class="g2"><div><label class="fl" for="c-name" style="margin-top:0">Your name</label><input class="fi2" id="c-name" autocomplete="name"><div class="er" data-e="name"></div></div><div><label class="fl" for="c-role" style="margin-top:0">Your role</label><select class="fi2" id="c-role"><option>Owner or director</option><option>Principal</option><option>Administrator</option><option>Accountant</option><option>Teacher</option><option>Other</option></select></div></div>
+    <label class="fl" for="c-school">School name</label><input class="fi2" id="c-school" autocomplete="organization"><div class="er" data-e="school"></div>
+    <div class="g2"><div><label class="fl" for="c-phone">Mobile number</label><input class="fi2" id="c-phone" inputmode="tel" placeholder="0300 1234567" autocomplete="tel"><div class="er" data-e="phone"></div></div><div><label class="fl" for="c-email">Email</label><input class="fi2" id="c-email" type="email" autocomplete="email"><div class="er" data-e="email"></div></div></div>
+    <div class="g2"><div><label class="fl" for="c-size">Number of students</label><select class="fi2" id="c-size"><option>Under 300</option><option>300 to 800</option><option>800 to 2,000</option><option>2,000 or more</option></select></div><div><label class="fl" for="c-city">City</label><input class="fi2" id="c-city" autocomplete="address-level2"></div></div>
+    <label class="fl" for="c-msg">How can we help?</label><textarea class="fi2" id="c-msg" rows="4" placeholder="For example: we collect fees by hand and want parents to pay online"></textarea>
+    <div class="er" data-e="msg"></div>
+    <div class="mf" style="justify-content:space-between;align-items:center"><span class="sub" style="margin:0;font-size:14px">Preview form · message delivery coming soon.</span><button class="btn p" type="submit">Preview message</button></div>
+    </div>
+   </form>
+   <div>
+    <div class="ci"><div><small>Call or WhatsApp</small><b>Phone number coming soon</b></div><div><small>Email</small><b>Email coming soon</b></div><div><small>Office hours</small><b>Monday to Saturday, 9 am to 6 pm</b></div><div><small>Visit</small><b>Office address to be added</b></div></div>
+    <div style="margin-top:30px"><h3 style="font-size:24px;margin-bottom:6px">Common questions</h3>
+     <details><summary>How long does it take to start?</summary><p>Most schools start with fees and attendance within two weeks. We import your student list from Excel.</p></details>
+     <details><summary>Can parents use it in Urdu?</summary><p>Yes. The parent portal, app and messages are in Urdu and English.</p></details>
+     <details><summary>Do we need new hardware?</summary><p>No. ILMA works in a browser and on phones. Fingerprint or face attendance is optional.</p></details>
+     <details><summary>What happens to our data?</summary><p>You own it. Export it any time, and every change to marks and fees is recorded.</p></details>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+</main>
+
+<footer><div class="wrap">
+ <div class="g"><div><a class="logo" href="#/home" style="color:#fff;padding:0"><span class="lg">✦</span>ILMA</a><p style="margin-top:14px;max-width:24em">School management for Pakistan, in Urdu and English.</p></div>
+  <div><h4>Product</h4><a href="#/features">All modules</a><a href="#/features" data-s="Exams and Results">Exams and results</a><a href="#/features" data-s="Fees and Finance">Fees and finance</a><a href="#/features" data-s="Insight and AI">ILMA AI</a></div>
+  <div><h4>Company</h4><a href="#/contact">Contact</a><a href="#" data-demo>Book a demo</a><a href="#/contact">Questions</a></div>
+  <div><h4>Legal</h4><a href="#/home" data-t="Privacy policy will be added before launch.">Privacy</a><a href="#/home" data-t="Terms will be added before launch.">Terms</a></div></div>
+ <div class="bt"><span>© 2026 ILMA. All rights reserved.</span><span>Product preview · Sample data. Contact details coming soon.</span></div>
+</div></footer>
+<div class="fd"><button class="btn p" data-demo style="box-shadow:0 14px 34px #b236c988">Book a demo</button></div>
+<div class="tray" id="tray"><span id="tcount"></span><button class="btn p s" data-demo>Book a demo with these</button><button class="x" id="tclr" aria-label="Clear selection" style="background:#ffffff22;color:#fff">✕</button></div>
+<div class="scrim" id="scrim"><div class="md" id="md" role="dialog" aria-modal="true" aria-labelledby="mt"></div></div>
+<div class="scrim" id="scrim2"><aside class="dr on" id="dr" style="transform:none;position:relative;margin-left:auto;min-height:88vh;border-radius:26px" role="dialog" aria-modal="true"></aside></div>
+<div id="toast" role="status"></div>
+
+<script src="./assets/catalogue.js" defer></script>
+<script src="./assets/app.js" defer></script>
+</body>
+</html>
