@@ -11,6 +11,25 @@
 <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
+<!-- Netlify detects this static form at deploy time; both visible flows submit via backend.js. -->
+<form name="ilma-enquiries" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+ <input type="hidden" name="form-name" value="ilma-enquiries">
+ <input name="bot-field">
+ <input name="kind">
+ <input name="name">
+ <input name="role">
+ <input name="school">
+ <input name="phone">
+ <input name="email">
+ <input name="student_range">
+ <input name="city">
+ <input name="message">
+ <input name="preferred_date">
+ <input name="preferred_time">
+ <input name="selected_modules">
+ <input name="consent">
+</form>
+
 <a class="skip sr" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap">
  <a class="logo" href="#/home" aria-label="ILMA home"><img class="brand-mark" src="./assets/ilma-logo.png" alt="" width="58" height="58">ILMA</a>

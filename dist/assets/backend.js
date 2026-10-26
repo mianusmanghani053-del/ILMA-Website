@@ -3,14 +3,30 @@
   const sdk = window.supabase;
   const configured = Boolean(config.supabaseUrl && config.supabaseAnonKey && sdk && sdk.createClient);
   const client = configured ? sdk.createClient(config.supabaseUrl, config.supabaseAnonKey) : null;
+  const provider = config.formProvider || "netlify";
 
   async function submitLead(lead) {
-    if (!client) throw new Error("The backend is not configured yet. Please try again later.");
-    const { error } = await client.from("leads").insert(lead);
-    if (error) {
-      console.error("ILMA lead submission failed", error);
-      throw new Error("We could not send your request. Please try again in a moment.");
+    if (provider === "netlify") {
+      const body = new URLSearchParams({ "form-name": "ilma-enquiries", "bot-field": "" });
+      for (const [key, value] of Object.entries(lead)) {
+        body.set(key, Array.isArray(value) ? value.join(", ") : value == null ? "" : String(value));
+      }
+      let response;
+      try {
+        response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: body.toString()
+        });
+      } catch {
+        throw new Error("We could not send your request. Please check your connection and try again.");
+      }
+      if (!response.ok) throw new Error("We could not send your request. Please try again or email contact@get-ilma.cloud.");
+      return;
     }
+    if (provider !== "supabase" || !client) throw new Error("The backend is not configured yet. Please email contact@get-ilma.cloud.");
+    const { error } = await client.from("leads").insert(lead);
+    if (error) throw new Error("We could not send your request. Please try again or email contact@get-ilma.cloud.");
   }
 
   window.ilmaBackend = { configured, client, submitLead };

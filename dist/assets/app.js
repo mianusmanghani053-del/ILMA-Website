@@ -100,7 +100,7 @@ $('#cform').addEventListener('submit',async e=>{e.preventDefault();const v=s=>$(
  if(v('c-website'))return;
  const submit=$('#cform button[type="submit"]');submit.disabled=true;$('#c-submit-error').textContent='';
  try{await window.ilmaBackend.submitLead({kind:'contact',name:v('c-name'),role:$('#c-role').value,school:v('c-school'),phone:v('c-phone'),email:v('c-email'),student_range:$('#c-size').value,city:v('c-city'),message:v('c-msg'),preferred_date:null,preferred_time:null,selected_modules:[],consent:true});
-  $('#cf-body').innerHTML=`<div style="padding:30px 6px"><div class="done" aria-hidden="true">✓</div><h2 style="font-size:30px">Enquiry received</h2><p class="sub">Thank you, ${E(v('c-name').split(' ')[0])}. Your enquiry has been saved for the ILMA team to follow up. No email notification is sent yet.</p><div class="mf" style="justify-content:flex-start"><button class="btn p" type="button" data-demo>Book a demo</button></div></div>`;
+  $('#cf-body').innerHTML=`<div style="padding:30px 6px"><div class="done" aria-hidden="true">✓</div><h2 style="font-size:30px">Enquiry received</h2><p class="sub">Thank you, ${E(v('c-name').split(' ')[0])}. Your enquiry has been saved for the ILMA team to follow up. We will respond using the contact details you provided.</p><div class="mf" style="justify-content:flex-start"><button class="btn p" type="button" data-demo>Book a demo</button></div></div>`;
  }catch(error){$('#c-submit-error').textContent=error.message;submit.disabled=false}});
 /* ---- global clicks ---- */
 document.addEventListener('click',e=>{const t=e.target;
