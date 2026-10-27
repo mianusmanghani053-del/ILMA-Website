@@ -7,16 +7,23 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 let lang='en',sel=new Set();
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2800)}
 /* ---- routing ---- */
-function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','contact','admin'].includes(h)?h:'home';
+function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','solutions','contact','admin'].includes(h.split('/')[0])?h.split('/')[0]:'home';
  $$('.pg').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('.links a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+ closeSolutions();if(p==='solutions')renderSolutions(h.split('/')[1]);
  $('#links').classList.remove('on');$('#burger').setAttribute('aria-expanded','false');
- document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA'}[p];
+ document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',solutions:'Solutions - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA'}[p];
  window.scrollTo(0,0);if(p==='home')startFeed();else stopFeed();if(p==='features')renderF();tray()}
 addEventListener('hashchange',route);
 /* ---- language ---- */
 function setLang(l){lang=l;$$('[data-en]').forEach(e=>{e.textContent=e.dataset[l];if(l==='ur'){e.dir='rtl';e.classList.add('ur')}else{e.removeAttribute('dir');e.classList.remove('ur')}});$('#lang').textContent=l==='ur'?'English':'اردو';document.documentElement.lang=l}
 $('#lang').onclick=()=>setLang(lang==='en'?'ur':'en');
-$('#burger').onclick=()=>{const o=$('#links').classList.toggle('on');$('#burger').setAttribute('aria-expanded',o)};
+$('#burger').onclick=()=>{closeSolutions();const o=$('#links').classList.toggle('on');$('#burger').setAttribute('aria-expanded',o)};
+/* ---- solutions navigation ---- */
+const solutionsToggle=$('#solutions-toggle'),solutionsMenu=$('#solutions-menu');
+function closeSolutions(){solutionsMenu.hidden=true;solutionsToggle.setAttribute('aria-expanded','false')}
+solutionsToggle.addEventListener('click',()=>{const open=solutionsMenu.hidden;solutionsMenu.hidden=!open;solutionsToggle.setAttribute('aria-expanded',String(open))});
+document.addEventListener('click',e=>{if(!e.target.closest('.nav'))closeSolutions();if(e.target.closest('#solutions-menu a')){closeSolutions();$('#links').classList.remove('on');$('#burger').setAttribute('aria-expanded','false')}if(e.target.closest('[data-start-free]')){closeSolutions();$('#c-msg').value='I would like to explore getting started with ILMA. Please let me know whether a free option is available.'}const link=e.target.closest('[data-solution-search]');if(link){fs='All';fq=link.dataset.solutionSearch;$('#q').value=fq;if(location.hash==='#/features')renderF()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!solutionsMenu.hidden){closeSolutions();solutionsToggle.focus()}});
 /* ---- hero feed ---- */
 const FEED=[['7:52','Attendance','Ayesha was marked present in 7-B.'],['9:40','Results','Class test, Urdu: Ayesha scored 17 out of 20.'],['11:15','Fees','November fee of Rs 8,500 is due on the 10th. Pay with Raast or JazzCash.'],['12:30','Transport','Bus 4 has left school. About 12 minutes to the Gulberg stop.'],['14:05','Homework','Class 7-B: 2 new questions on Chapter 6, due tomorrow.'],['15:30','Notice','Parent-teacher meeting on Saturday. Book a 10-minute slot.']];
 let fi=0,ft=null;
