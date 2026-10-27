@@ -116,6 +116,9 @@ document.addEventListener('click',e=>{const t=e.target;
  if(t.closest('[data-demo]')){e.preventDefault();demo();return}
  if(t.closest('[data-close]')){closeAll();return}
  if(t.id==='scrim'||t.id==='scrim2'){closeAll();return}
+ const enquiry=t.closest('[data-enquiry]');
+ if(enquiry){const message=$('#c-msg');if(message){message.value=enquiry.dataset.enquiry;setTimeout(()=>message.focus(),0)}}
+ if(t.closest('[data-all-modules]')){fs='All';fq='';$('#q').value='';if(location.hash==='#/features')renderF()}
  let b;
  if(b=t.closest('[data-day]')){D.day=+b.dataset.day;D.slot=null;D.err={};demoUI();return}
  if(b=t.closest('[data-slot]')){D.slot=+b.dataset.slot;D.err={};demoUI();return}
@@ -127,7 +130,7 @@ document.addEventListener('click',e=>{const t=e.target;
  if(b=t.closest('[data-f]')){fs=b.dataset.f;renderF();return}
  if(t.closest('[data-clear]')){fq='';$('#q').value='';fs='All';renderF();return}
  if(t.closest('#tclr')){sel.clear();renderF();tray();return}
- if(b=t.closest('a[data-s]')){fs=b.dataset.s;fq='';$('#q').value=''}
+ if(b=t.closest('a[data-s]')){fs=b.dataset.s;fq='';$('#q').value='';if(location.hash==='#/features')renderF()}
  if(b=t.closest('a[data-t]')){e.preventDefault();toast(b.dataset.t)}
 });
 document.addEventListener('submit',e=>{if(e.target.id==='dform'){e.preventDefault();demoNext()}});
