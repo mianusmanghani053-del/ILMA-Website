@@ -21,7 +21,12 @@ $('#burger').onclick=()=>{closeSolutions();const o=$('#links').classList.toggle(
 /* ---- solutions navigation ---- */
 const solutionsToggle=$('#solutions-toggle'),solutionsMenu=$('#solutions-menu');
 function closeSolutions(){solutionsMenu.hidden=true;solutionsToggle.setAttribute('aria-expanded','false')}
-solutionsToggle.addEventListener('click',()=>{const open=solutionsMenu.hidden;solutionsMenu.hidden=!open;solutionsToggle.setAttribute('aria-expanded',String(open))});
+function openSolutions(){solutionsMenu.hidden=false;solutionsToggle.setAttribute('aria-expanded','true')}
+solutionsToggle.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')openSolutions()});
+$('.nav').addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')closeSolutions()});
+$$('.nav .links>a').forEach(link=>link.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')closeSolutions()}));
+solutionsToggle.addEventListener('click',e=>{if(e.detail>0&&matchMedia('(hover: hover) and (pointer: fine)').matches)openSolutions();else if(solutionsMenu.hidden)openSolutions();else closeSolutions()});
+$('.nav').addEventListener('focusout',e=>{if(!$('.nav').contains(e.relatedTarget))closeSolutions()});
 document.addEventListener('click',e=>{if(!e.target.closest('.nav'))closeSolutions();if(e.target.closest('#solutions-menu a')){closeSolutions();$('#links').classList.remove('on');$('#burger').setAttribute('aria-expanded','false')}if(e.target.closest('[data-start-free]')){closeSolutions();$('#c-msg').value='I would like to explore getting started with ILMA. Please let me know whether a free option is available.'}const link=e.target.closest('[data-solution-search]');if(link){fs='All';fq=link.dataset.solutionSearch;$('#q').value=fq;if(location.hash==='#/features')renderF()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!solutionsMenu.hidden){closeSolutions();solutionsToggle.focus()}});
 /* ---- hero feed ---- */

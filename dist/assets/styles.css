@@ -222,7 +222,6 @@ footer .brand-mark{width:68px;height:68px;background:#f5faff;border-radius:16px;
 .links{gap:2px;margin-left:0;align-items:center}
 .solutions-toggle{border:0;background:none;padding:9px 14px;border-radius:99px;font-weight:600;font-size:15px;white-space:nowrap}
 .solutions-toggle:hover,.solutions-toggle[aria-expanded="true"]{background:var(--lil);color:var(--v)}
-.chevron{display:inline-block;transition:transform .2s}.solutions-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}
 .start-free{background:#ffc343;color:var(--dark);white-space:nowrap}.start-free:hover{background:#ffd36f}
 .advisor{background:#fff;border:1.5px solid var(--v);color:#104ac8;white-space:nowrap}.advisor:hover{background:var(--lil)}
 .solutions-menu[hidden]{display:none}
@@ -255,14 +254,26 @@ a.solution-card:hover{border-color:#88b9f5;box-shadow:0 12px 30px #155eef12}
 @media(max-width:980px){.links .mobile-advisor{display:block;color:#104ac8;border:1px solid var(--v);margin-top:8px;text-align:center}}
 
 /* White canvas and light cyan card surfaces. */
-:root{--bg:#fff;--card:#e0ffff}
+:root{--bg:#fff;--card:#d5f3f5}
 body,.nav{background:#fff}
 .solution-card,.mc,.pn,.kp,.tab,.fi,.fc,.lead-card{background:var(--card)}
 .mc.sel{background:var(--card)}
 .tab.on{background:var(--grad)}
 .institution-grid a{background:var(--card)}
-.institution-grid a:hover{background:#ccf5fa}
+.institution-grid a:hover{background:#bee9ee}
 .solution-card h3{font-size:25px}
 .solution-category{margin-top:48px}
 .solution-category>h2{font-size:30px;border-bottom:1px solid var(--line);padding-bottom:16px}
 .solution-category .solution-cards{margin-top:24px}
+
+/* Dark cyan header, with a white canvas and Bubbles Cyan card tint. */
+.nav{background:#006b70;border-bottom-color:#00585d;color:#fff}
+.nav .logo,.nav .links>a,.nav .solutions-toggle{color:#fff}
+.nav .links>a:hover,.nav .links>a.on,.nav .solutions-toggle:hover,.nav .solutions-toggle[aria-expanded="true"]{background:#ffffff22;color:#fff}
+.nav .lang,.nav .burger{color:#006b70;border-color:#b8e5e8}
+.nav .advisor{color:#006b70;border-color:#fff}
+.nav .start-free{color:#092454}
+.solutions-menu{color:var(--ink)}
+.solution-card,.mc,.pn,.tab,.fi,.fc,.lead-card{border-color:#a8dce2}
+a.solution-card:hover{border-color:#48a9b3;box-shadow:0 12px 30px #006b7014}
+@media(max-width:980px){.nav .links{background:#006b70}.nav .links .mobile-advisor{border-color:#b8e5e8}}
