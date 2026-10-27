@@ -7,11 +7,11 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 let sel=new Set();
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2800)}
 /* ---- routing ---- */
-function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','solutions','contact','admin'].includes(h.split('/')[0])?h.split('/')[0]:'home';
+function route(){const h=(location.hash||(location.pathname.replace(/\/$/,'')==='/signup'?'#/signup':'#/home')).replace('#/','')||'home',p=['home','features','solutions','contact','admin','signup'].includes(h.split('/')[0])?h.split('/')[0]:'home';
  $$('.pg').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('.links a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
  closeSolutions();if(p==='solutions')renderSolutions(h.split('/')[1]);
  $('#links').classList.remove('on');$('#burger').setAttribute('aria-expanded','false');
- document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',solutions:'Solutions - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA'}[p];
+ document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',solutions:'Solutions - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA',signup:'Referral Signup - ILMA'}[p];
  window.scrollTo(0,0);if(p==='home')startFeed();else stopFeed();if(p==='features')renderF();tray()}
 addEventListener('hashchange',route);
 $('#burger').onclick=()=>{closeSolutions();const o=$('#links').classList.toggle('on');$('#burger').setAttribute('aria-expanded',o)};

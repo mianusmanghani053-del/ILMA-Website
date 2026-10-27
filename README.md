@@ -42,3 +42,11 @@ The lead form collects names, school/contact details and enquiry text with expli
 - `dist/assets/backend.js` and `dist/assets/backend-config.js`: Supabase client and public project settings.
 
 Routes are `#/home`, `#/features`, `#/contact` and `#/admin`. The Urdu switch translates only the strings supplied in the original mockup. Role dashboards, AI scan and available demo times are sample previews. Netlify email notifications require the dashboard configuration described above. Calendar downloads do not reserve appointments.
+
+
+## Referral signup
+The footer’s Referral Program opens `#/signup`. Netlify also serves `/signup` through `dist/_redirects`. The page follows the supplied partner mockup’s split layout, adapted to ILMA, and collects a referral application (name, email, country, WhatsApp, organization, connection type, optional notes and contact consent).
+
+Applications are submitted to the separate Netlify form **ilma-referral-signups**. After deployment, confirm form detection and add an email notification for this form to **contact@get-ilma.cloud**, just as for `ilma-enquiries`. A notification restricted to the enquiries form will not cover referral applications. Verify a live application appears in Forms and reaches the mailbox.
+
+This is application registration, not authenticated account creation: no password, simulated OTP, automatic approval, referral tracking or payouts are implemented. A production account portal needs an authentication backend and approved program/privacy terms. The uploaded mockup’s simulated account and commission logic is not deployed. Local submission tests use a mocked Netlify endpoint and do not establish live delivery.
