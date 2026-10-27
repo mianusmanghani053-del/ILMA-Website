@@ -4,7 +4,7 @@ const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* ---- DATA: 65 modules in 11 suites ---- */
 /* ---- helpers ---- */
-let lang='en',sel=new Set();
+let sel=new Set();
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2800)}
 /* ---- routing ---- */
 function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['home','features','solutions','contact','admin'].includes(h.split('/')[0])?h.split('/')[0]:'home';
@@ -14,9 +14,6 @@ function route(){const h=(location.hash||'#/home').replace('#/','')||'home',p=['
  document.title={home:'ILMA - The whole school in one calm place',features:'Features - ILMA',solutions:'Solutions - ILMA',contact:'Contact - ILMA',admin:'Lead inbox - ILMA'}[p];
  window.scrollTo(0,0);if(p==='home')startFeed();else stopFeed();if(p==='features')renderF();tray()}
 addEventListener('hashchange',route);
-/* ---- language ---- */
-function setLang(l){lang=l;$$('[data-en]').forEach(e=>{e.textContent=e.dataset[l];if(l==='ur'){e.dir='rtl';e.classList.add('ur')}else{e.removeAttribute('dir');e.classList.remove('ur')}});$('#lang').textContent=l==='ur'?'English':'اردو';document.documentElement.lang=l}
-$('#lang').onclick=()=>setLang(lang==='en'?'ur':'en');
 $('#burger').onclick=()=>{closeSolutions();const o=$('#links').classList.toggle('on');$('#burger').setAttribute('aria-expanded',o)};
 /* ---- solutions navigation ---- */
 const solutionsToggle=$('#solutions-toggle'),solutionsMenu=$('#solutions-menu');
