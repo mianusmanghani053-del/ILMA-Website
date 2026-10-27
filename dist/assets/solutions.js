@@ -1,5 +1,17 @@
 const ILMA_SOLUTIONS = [
   {
+    "id": "high-school",
+    "icon": "🏫",
+    "title": "High School",
+    "description": "Connect subject teaching, attendance, board exams and parent updates.",
+    "topics": [
+      "Attendance",
+      "Exams and Results",
+      "Parent"
+    ],
+    "category": "By Institution"
+  },
+  {
     "id": "schools",
     "icon": "🏫",
     "title": "K–12 Schools",
@@ -8,7 +20,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Attendance",
       "Exams and Results"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "colleges",
@@ -19,7 +32,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Courses",
       "Results"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "universities",
@@ -30,7 +44,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Finance"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "preschools",
@@ -41,7 +56,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Attendance",
       "Parent"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "academies",
@@ -52,7 +68,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Attendance",
       "Fees"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "vocational",
@@ -63,7 +80,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Learning",
       "Results"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "faith-schools",
@@ -74,7 +92,8 @@ const ILMA_SOLUTIONS = [
       "Learning",
       "Attendance",
       "Parent"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "summer-schools",
@@ -85,7 +104,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Courses",
       "Timetable"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "school-groups",
@@ -96,7 +116,8 @@ const ILMA_SOLUTIONS = [
       "Campus",
       "Finance",
       "Analytics"
-    ]
+    ],
+    "category": "By Institution"
   },
   {
     "id": "principals",
@@ -107,7 +128,8 @@ const ILMA_SOLUTIONS = [
       "Analytics",
       "Attendance",
       "Results"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "school-owners",
@@ -118,7 +140,8 @@ const ILMA_SOLUTIONS = [
       "Finance",
       "Campus",
       "Admissions"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "finance-teams",
@@ -129,7 +152,8 @@ const ILMA_SOLUTIONS = [
       "Fees",
       "Finance",
       "Payments"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "registrars",
@@ -140,7 +164,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Student",
       "Records"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "admissions-teams",
@@ -151,7 +176,8 @@ const ILMA_SOLUTIONS = [
       "Admissions",
       "Enrolment",
       "Communication"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "teachers",
@@ -162,7 +188,8 @@ const ILMA_SOLUTIONS = [
       "Learning",
       "Exams",
       "Attendance"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "it-administrators",
@@ -173,7 +200,8 @@ const ILMA_SOLUTIONS = [
       "Security",
       "Integration",
       "Administration"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "parents",
@@ -184,7 +212,8 @@ const ILMA_SOLUTIONS = [
       "Parent",
       "Fees",
       "Communication"
-    ]
+    ],
+    "category": "By Role"
   },
   {
     "id": "montessori",
@@ -195,7 +224,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "international",
@@ -206,7 +236,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "boarding",
@@ -217,7 +248,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "language",
@@ -228,7 +260,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "music",
@@ -239,7 +272,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "sports",
@@ -250,7 +284,8 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   },
   {
     "id": "after-school",
@@ -261,14 +296,16 @@ const ILMA_SOLUTIONS = [
       "Courses",
       "Admissions",
       "Communication"
-    ]
+    ],
+    "category": "More Institutions"
   }
 ];
 function renderSolutions(id) {
  const target=document.querySelector('#solutions-content');
  const solution=ILMA_SOLUTIONS.find(s=>s.id===id);
  if(!solution){
-  target.innerHTML=`<div class="pt"><span class="pill">Built around your day</span><h1>A starting point for every institution</h1><p class="sub">Explore ILMA by institution or role, then choose the modules you want to see in a demo.</p></div><div class="solution-cards">${ILMA_SOLUTIONS.map(s=>`<a class="solution-card" href="#/solutions/${s.id}"><span class="solution-icon" aria-hidden="true">${s.icon}</span><h2>${s.title}</h2><p>${s.description}</p><span class="solution-card-link">Explore solution →</span></a>`).join('')}</div>`;
+  const groups=['By Institution','By Role','More Institutions'];
+  target.innerHTML=`<div class="pt"><span class="pill">Built around your day</span><h1>A starting point for every institution</h1><p class="sub">Explore ILMA by institution or role, then choose the modules you want to see in a demo.</p></div>${groups.map((group,i)=>`<section class="solution-category" aria-labelledby="solution-category-${i}"><h2 id="solution-category-${i}">${group}</h2><div class="solution-cards">${ILMA_SOLUTIONS.filter(s=>s.category===group).map(s=>`<a class="solution-card" href="#/solutions/${s.id}"><span class="solution-icon" aria-hidden="true">${s.icon}</span><h3>${s.title}</h3><p>${s.description}</p><span class="solution-card-link">Explore solution →</span></a>`).join('')}</div></section>`).join('')}`;
   return;
  }
  target.innerHTML=`<div class="pt solution-heading"><a class="solution-back" href="#/solutions">← All solutions</a><span class="solution-icon" aria-hidden="true">${solution.icon}</span><h1>${solution.title}</h1><p class="sub">${solution.description}</p><div class="solution-actions"><button class="btn p" data-demo>Book a tailored demo</button><a class="btn advisor" href="#/contact">Talk to an Advisor</a></div></div><div class="solution-note">Explore these workflows with our team to confirm the right fit for your institution.</div><div class="solution-cards">${solution.topics.map((topic,i)=>`<article class="solution-card"><span class="solution-number">0${i+1}</span><h2>${topic}</h2><p>Browse the catalogue and choose the ${topic.toLowerCase()} capabilities you want to explore.</p><a class="solution-card-link" href="#/features" data-solution-search="${topic}">View related modules →</a></article>`).join('')}</div><div class="cta"><div><h2>Your institution. Your starting point.</h2><p>Tell us what takes the most time today. We will help you explore the relevant modules.</p></div><button class="btn w" data-demo>Book a demo</button></div>`;
