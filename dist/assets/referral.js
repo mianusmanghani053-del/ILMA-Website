@@ -32,7 +32,7 @@
       success.querySelector('h2').focus();
       form.reset();
     } catch {
-      error.textContent = 'We could not submit your application. Please try again, or email contact@get-ilma.cloud. Your details are still in the form.';
+      error.textContent = 'We could not submit your application. Please try again, or email contact@almantiqhub.com. Your details are still in the form.';
       button.disabled = false;
       button.textContent = 'Submit referral application →';
     } finally {
